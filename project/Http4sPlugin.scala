@@ -37,7 +37,7 @@ object Http4sPlugin extends AutoPlugin {
     scalaVersion := scala_213,
     crossScalaVersions := Seq(scala_213, scala_212),
 
-    addCompilerPlugin("org.typelevel" % "kind-projector" % "0.11.0" cross CrossVersion.full),
+    addCompilerPlugin("org.typelevel" % "kind-projector_2.13.4" % "0.11.2"),
     addCompilerPlugin("com.olegpy" %% "better-monadic-for" % "0.3.1"),
 
     http4sBuildData := {

@@ -66,9 +66,9 @@ lazy val core = libraryProject("core")
   .enablePlugins(
     BuildInfoPlugin,
     MimeLoaderPlugin,
-    SilencerPlugin
   )
   .settings(
+    scalacOptions -= "-Xfatal-warnings",
     description := "Core http4s library for servers and clients",
     buildInfoKeys := Seq[BuildInfoKey](
       version,
@@ -115,13 +115,13 @@ lazy val tests = libraryProject("tests")
   .dependsOn(core, testing % "test->test")
 
 lazy val server = libraryProject("server")
-  .enablePlugins(SilencerPlugin)
   .settings(
     description := "Base library for building http4s servers"
   )
   .settings(BuildInfoPlugin.buildInfoScopedSettings(Test))
   .settings(BuildInfoPlugin.buildInfoDefaultSettings)
   .settings(
+    scalacOptions -= "-Xfatal-warnings",
     buildInfoKeys := Seq[BuildInfoKey](
       resourceDirectory in Test,
     ),
@@ -147,7 +147,6 @@ lazy val prometheusMetrics = libraryProject("prometheus-metrics")
   )
 
 lazy val client = libraryProject("client")
-  .enablePlugins(SilencerPlugin)
   .settings(
     description := "Base library for building http4s clients",
     libraryDependencies += jettyServlet % Test
@@ -561,23 +560,6 @@ lazy val examplesWar = exampleProject("examples-war")
   .dependsOn(servlet)
 
 lazy val scalafixSettings: Seq[Setting[_]] = Seq(
-  developers ++= List(
-    Developer(
-      "amarrella",
-      "Alessandro Marrella",
-      "hello@alessandromarrella.com",
-      url("https://alessandromarrella.com")
-    ),
-    Developer(
-      "satorg",
-      "Sergey Torgashov",
-      "satorg@gmail.com",
-      url("https://github.com/satorg")
-    ),
-  ),
-  addCompilerPlugin(scalafixSemanticdb),
-  scalacOptions += "-Yrangepos",
-  mimaPreviousArtifacts := Set.empty,
 )
 
 lazy val scalafixRules = project

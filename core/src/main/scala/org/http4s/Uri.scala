@@ -12,7 +12,6 @@ package org.http4s
 
 import cats.{Eq, Hash, Order, Show}
 import cats.syntax.either._
-import com.github.ghik.silencer.silent
 import java.net.{Inet4Address, Inet6Address, InetAddress}
 import java.nio.{ByteBuffer, CharBuffer}
 import java.nio.charset.{Charset => JCharset}
@@ -252,7 +251,6 @@ object Uri {
     def unsafeFromString(s: String): Scheme =
       fromString(s).fold(throw _, identity)
 
-    @silent("deprecated")
     private[http4s] trait Parser { self: PbParser =>
       def scheme =
         rule {

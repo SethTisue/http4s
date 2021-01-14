@@ -11,7 +11,6 @@
 package org.http4s
 package parser
 
-import com.github.ghik.silencer.silent
 import org.http4s.SameSite._
 import org.http4s.headers.`Set-Cookie`
 import org.http4s.internal.parboiled2._
@@ -112,7 +111,6 @@ private[parser] trait CookieHeader {
 
     def DomainNamePart: Rule0 = rule(AlphaNum ~ zeroOrMore(AlphaNum | ch('-')))
 
-    @silent("deprecated")
     def StringValue: Rule1[String] = rule(capture(oneOrMore((!(CTL | ch(';'))) ~ Char)))
 
     def SameSite: Rule1[SameSite] =
